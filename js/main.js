@@ -64,8 +64,8 @@ function init(){
         //update our view with the results
         for(let result in results){
             // Always remeber to think about: what should these logs be
-            console.log(resultsElements[result], "<=== this is resultsElements[result]")
-            console.log(rpsLookup[results[result]].imgUrl, "<=== this is rpsLookup[results[result]].imgUrl")
+            // console.log(resultsElements[result], "<=== this is resultsElements[result]")
+            // console.log(rpsLookup[results[result]].imgUrl, "<=== this is rpsLookup[results[result]].imgUrl")
             resultsElements[result].src = rpsLookup[results[result]].imgUrl
         }
     };
@@ -73,7 +73,37 @@ function init(){
 
 
 function playRound(e){
-    console.log('play round')
+    // console.log('play round')
+    // creat a function outise of here
+    // but use it in here to get a random value from our rpsLookup
+    // this function would return r p or s
+
+    // run it twice
+    // once for the player
+    // once for the computer
+
+    // compare our results and then update our
+    // winner state variable, update the scores
+
+    // run the render()
+    results.player = getRandomRPS();
+    results.computer = getRandomRPS();
+    // Determine winner
+    if (results.player === results.c) {
+        winner = 't';
+    } else if (results.computer === rpsLookup[results.p].beats) {
+        winner = 'player';
+    } else {
+        winner = 'computer';
+    }
+    // Update score
+    scores[winner]++;
+    // After all impacted state has been updated, call render
+    render();
 }
 
-// alert('ready!')
+function getRandomRPS() {
+  let rps = Object.keys(rpsLookup);
+  let rndIdx = Math.floor(Math.random() * rps.length);
+  return rps[rndIdx];
+}
